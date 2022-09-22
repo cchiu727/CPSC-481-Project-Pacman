@@ -73,30 +73,49 @@ def tinyMazeSearch(problem):
     return  [s, s, w, s, w, w, s, w]
 
 def depthFirstSearch(problem):
-    """
-    Search the deepest nodes in the search tree first.
+    open = util.Stack()
+    closed = []
+    actionsList = []
+    
+    # push root node on stack, and empty actions list
+    open.push((problem.getStartState(), actionsList))
 
-    Your search algorithm needs to return a list of actions that reaches the
-    goal. Make sure to implement a graph search algorithm.
-
-    To get started, you might want to try some of these simple commands to
-    understand the search problem that is being passed in:
-
-    print("Start:", problem.getStartState())
-    print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
-    print("Start's successors:", problem.getSuccessors(problem.getStartState()))
-    """
-    "*** YOUR CODE HERE ***"
+    while not open.isEmpty():
+        currentState, currentActionsList = open.pop() # unpack
+        if problem.isGoalState(currentState): # returns actions if goal state reached
+            return currentActionsList
+        elif currentState not in closed: # if state is unvisited
+            closed.append(currentState) # add state to closed
+            for successor, action, stepCount in problem.getSuccessors(currentState): # unpack
+                newActionsList = currentActionsList.copy() # take copy of actions list
+                newActionsList.append(action) # append new action
+                open.push((successor, newActionsList)) # push successor and actions list on stack
+    return currentActionsList # FAIL
     util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
-    """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
+    
     util.raiseNotDefined()
 
 def uniformCostSearch(problem):
-    """Search the node of least total cost first."""
-    "*** YOUR CODE HERE ***"
+    open = util.Queue()
+    closed = []
+    actionsList = []
+    
+    # push root node on queue, and empty actions list
+    open.push((problem.getStartState(), actionsList))
+
+    while not open.isEmpty():
+        currentState, currentActionsList = open.pop() # unpack
+        if problem.isGoalState(currentState): # returns actions if goal state reached
+            return currentActionsList
+        elif currentState not in closed: # if state is unvisited
+            closed.append(currentState) # add state to closed
+            for successor, action, stepCount in problem.getSuccessors(currentState): # unpack
+                newActionsList = currentActionsList.copy() # take copy of actions list
+                newActionsList.append(action) # append new action
+                open.push((successor, newActionsList)) # push successor and actions list on queue
+    return currentActionsList # FAIL
     util.raiseNotDefined()
 
 def nullHeuristic(state, problem=None):
