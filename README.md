@@ -2,5 +2,5 @@
 
 Collin Chiu,
 AJ Albrecht,
-Jonathan Story
+Jonathan Story,
 Tung,
