@@ -3,4 +3,4 @@
 Collin Chiu,
 AJ Albrecht,
 Jonathan Story,
-Tung,
+Tung Nguyen,
