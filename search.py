@@ -98,7 +98,7 @@ def breadthFirstSearch(problem):
     util.raiseNotDefined()
 
 def uniformCostSearch(problem):
-    open = util.Stack()
+    open = util.Queue()
     closed = []
     actionsList = []
     
