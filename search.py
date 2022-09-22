@@ -94,10 +94,6 @@ def depthFirstSearch(problem):
     util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
-    
-    util.raiseNotDefined()
-
-def uniformCostSearch(problem):
     open = util.Queue()
     closed = []
     actionsList = []
@@ -118,6 +114,11 @@ def uniformCostSearch(problem):
     return currentActionsList # FAIL
     util.raiseNotDefined()
 
+def uniformCostSearch(problem):
+    """Search the node of least total cost first."""
+    "*** YOUR CODE HERE ***"
+    util.raiseNotDefined()
+    
 def nullHeuristic(state, problem=None):
     """
     A heuristic function estimates the cost from the current state to the nearest
