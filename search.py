@@ -129,6 +129,32 @@ def nullHeuristic(state, problem=None):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
+
+    open = util.Queue()
+    closed = []
+
+    start = []
+
+    # push starting state onto stack
+    #open.push((root, []))
+    open.push((problem.getStartState(), start))
+
+    while not open.isEmpty():
+        currentActionsList, X = open.pop()
+        if problem.isGoalState(X):
+            return currentActionsList
+        elif X not in closed:
+            
+
+            closed.append(currentState)
+            for successor, action, stepCount in problem.getSuccessors(currentState):
+                #newAction = currentActionsList + [action]
+                newAction = currentActionsList.copy()
+                newAction.append(action)
+                open.push((successor, newAction))
+
+
+    #Best-First search pseudocode algorithm on page 5 of LO4 slides
     util.raiseNotDefined()
 
 
