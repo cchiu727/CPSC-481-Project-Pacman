@@ -151,9 +151,12 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                 {
                     #child is not on open or closed
                     #If child is on open
-                    if n not in open and n not in closed:
+                    if (n not in open and n not in closed):
                         #assign the child a heuritsic value
                         X.append(n)
+
+                    elif n in open:
+                        if     
 
                 }
 
