@@ -144,7 +144,14 @@ def aStarSearch(problem, heuristic=nullHeuristic):
         if problem.isGoalState(X):
             return currentActionsList
         elif X not in closed:
-            
+            while (len(X) > 0):
+            {
+                n = len(X)
+            }
+            while (n > 0):
+                {
+                    
+                }
 
             closed.append(currentState)
             for successor, action, stepCount in problem.getSuccessors(currentState):
