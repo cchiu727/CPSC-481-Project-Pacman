@@ -136,7 +136,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     start = []
 
     # push starting state onto stack
-    #open.push((root, []))
     open.push((problem.getStartState(), start))
 
     while not open.isEmpty():
@@ -148,8 +147,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                 n = len(X)
             
             while (n > 0):
-                #child is not on open or closed
-                #If child is on open
                 if (n not in open and n not in closed):
                     #assign the child a heuritsic value
                     X.append(n)
