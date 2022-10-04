@@ -145,12 +145,13 @@ def aStarSearch(problem, heuristic=nullHeuristic):
             return currentActionsList
         elif X not in closed:
             while (len(X) > 0):
-            {
                 n = len(X)
-            }
+            
             while (n > 0):
                 {
-                    
+                    #child is not on open or closed
+                    #If child is on open
+                        X 
                 }
 
             closed.append(currentState)
