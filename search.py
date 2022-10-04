@@ -156,9 +156,16 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                         X.append(n)
 
                     elif n in open:
-                        if     
+                        #if child is reached by shorter path
+                            #give state on open the shorter path
+                    elif n in closed:
+                        #if child is reached by shorter path then
+                            Closed.remove(X)
+                            Open.append(n)
+                           
 
                 }
+                Closed.Append(X)
 
             closed.append(currentState)
             for successor, action, stepCount in problem.getSuccessors(currentState):
