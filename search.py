@@ -148,31 +148,30 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                 n = len(X)
             
             while (n > 0):
-                {
-                    #child is not on open or closed
-                    #If child is on open
-                    if (n not in open and n not in closed):
-                        #assign the child a heuritsic value
-                        X.append(n)
+                #child is not on open or closed
+                #If child is on open
+                if (n not in open and n not in closed):
+                    #assign the child a heuritsic value
+                    X.append(n)
 
-                    elif n in open:
-                        #if child is reached by shorter path
-                            #give state on open the shorter path
-                    elif n in closed:
-                        #if child is reached by shorter path then
-                            Closed.remove(X)
-                            Open.append(n)
+                elif n in open:
+                    return "TEMP"
+                    #if child is reached by shorter path
+                        #give state on open the shorter path
+                elif n in closed:
+                    #if child is reached by shorter path then
+                        closed.remove(X)
+                        open.append(n)
                            
 
-                }
-                Closed.Append(X)
+            closed.append(X)
 
-            closed.append(currentState)
-            for successor, action, stepCount in problem.getSuccessors(currentState):
-                #newAction = currentActionsList + [action]
-                newAction = currentActionsList.copy()
-                newAction.append(action)
-                open.push((successor, newAction))
+            # closed.append(currentState)
+            # for successor, action, stepCount in problem.getSuccessors(currentState):
+            #     #newAction = currentActionsList + [action]
+            #     newAction = currentActionsList.copy()
+            #     newAction.append(action)
+            #     open.push((successor, newAction))
 
 
     #Best-First search pseudocode algorithm on page 5 of LO4 slides
