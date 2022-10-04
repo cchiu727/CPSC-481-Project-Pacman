@@ -130,7 +130,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
 
-    open = util.Queue()
+    open = util.Stack()
     closed = []
 
     start = []
@@ -151,7 +151,10 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                 {
                     #child is not on open or closed
                     #If child is on open
-                        X 
+                    if n not in open and n not in closed:
+                        #assign the child a heuritsic value
+                        X.append(n)
+
                 }
 
             closed.append(currentState)
