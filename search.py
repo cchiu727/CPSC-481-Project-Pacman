@@ -155,10 +155,12 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                     # IGNORE THIS TEMP RETURN
                     #return "TEMP"
                     #if child is reached by shorter path
-                    if n > 0:                        #give state on open the shorter path
-                        open.append(X)
+                    if n > 0:
+                        #give state on open the shorter path
+                        open.append("NOT SURE")
                 elif n in closed:
                     #if child is reached by shorter path then
+                    if n < len(X):
                         closed.remove(X)
                         open.append(n)
                            
