@@ -145,11 +145,12 @@ def aStarSearch(problem, heuristic=nullHeuristic):
         elif X not in closed:
             while (len(X) > 0):
                 n = len(X)
-            
+
             while (n > 0):
                 if (n not in open and n not in closed):
                     #assign the child a heuristic value
-                    X.append(n)
+                    #X.append(n)
+                    n.append("Heurstistic Value")
 
                 elif n in open:
                     # IGNORE THIS TEMP RETURN
@@ -163,7 +164,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                     if n < len(X):
                         closed.remove(X)
                         open.append(n)
-                           
+
 
             closed.append(X)
 
