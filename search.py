@@ -139,7 +139,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     open.push((problem.getStartState(), start))
 
     while not open.isEmpty():
-        currentActionsList, X = open.pop()
+        X, currentActionsList= open.pop()
         if problem.isGoalState(X):
             return currentActionsList
         elif X not in closed:
