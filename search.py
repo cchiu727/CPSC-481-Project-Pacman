@@ -169,6 +169,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     #         closed.append(X)
 
 
+    # TEST CODE FROM STACKOVERFLOW
     fringe = util.PriorityQueue()
     visited = {} # Visited nodes
 
