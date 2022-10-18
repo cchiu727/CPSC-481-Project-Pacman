@@ -130,43 +130,66 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
 
-    open = util.Stack()
-    closed = []
+    # open = util.Stack()
+    # closed = []
 
-    start = []
+    # start = []
 
-    # push starting state onto stack
-    open.push((problem.getStartState(), start))
+    # # push starting state onto stack
+    # open.push((problem.getStartState(), start))
 
-    while not open.isEmpty():
-        X, currentActionsList= open.pop()
-        if problem.isGoalState(X):
-            return currentActionsList
-        elif X not in closed:
-            while (len(X) > 0):
-                n = len(X)
+    # while not open.isEmpty():
+    #     X, currentActionsList= open.pop()
+    #     if problem.isGoalState(X):
+    #         return currentActionsList
+    #     elif X not in closed:
+    #         while (len(X) > 0):
+    #             n = len(X)
 
-            while (n > 0):
-                if (n not in open and n not in closed):
-                    #assign the child a heuristic value
-                    #X.append(n)
-                    n.append("Heurstistic Value")
+    #         while (n > 0):
+    #             if (n not in open and n not in closed):
+    #                 #assign the child a heuristic value
+    #                 #X.append(n)
+    #                 n.append("Heurstistic Value")
 
-                elif n in open:
-                    # IGNORE THIS TEMP RETURN
-                    #return "TEMP"
-                    #if child is reached by shorter path
-                    if n < len(X):
-                        #give state on open the shorter path
-                        open.append(n)
-                elif n in closed:
-                    #if child is reached by shorter path then
-                    if n < len(X):
-                        closed.remove(X)
-                        open.append(n)
+    #             elif n in open:
+    #                 # IGNORE THIS TEMP RETURN
+    #                 #return "TEMP"
+    #                 #if child is reached by shorter path
+    #                 if n < len(X):
+    #                     #give state on open the shorter path
+    #                     open.append(n)
+    #             elif n in closed:
+    #                 #if child is reached by shorter path then
+    #                 if n < len(X):
+    #                     closed.remove(X)
+    #                     open.append(n)
 
 
-            closed.append(X)
+    #         closed.append(X)
+
+
+    fringe = util.PriorityQueue()
+    visited = {} # Visited nodes
+
+    if problem.isGoalState(problem.getStartState()):
+        return []
+
+    fringe.push((problem.getStartState(),[]),0)
+
+    while not fringe.isEmpty():
+        currentState, pathToCurrent = fringe.pop()
+        currentCost = problem.getCostOfActions(pathToCurrent)
+
+        if problem.isGoalState(currentState):
+            return pathToCurrent
+
+        if currentState not in visited or currentCost<visited[currentState]:
+            visited[currentState]=currentCost
+            for successor,action,stepCost in problem.getSuccessors(currentState):
+                currentTotalCost = currentCost + stepCost + heuristic(successor,problem)
+                fringe.push((successor, pathToCurrent+[action]),currentTotalCost)
+    return []
 
             # closed.append(currentState)
             # for successor, action, stepCount in problem.getSuccessors(currentState):
