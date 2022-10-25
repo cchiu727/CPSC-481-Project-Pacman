@@ -172,7 +172,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
 
     #         closed.append(X)
 
-
     # TEST CODE FROM STACKOVERFLOW
     fringe = util.PriorityQueue()
     visited = {} # Visited nodes
@@ -195,6 +194,30 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                 currentTotalCost = currentCost + stepCost + heuristic(successor,problem)
                 fringe.push((successor, pathToCurrent+[action]),currentTotalCost)
     return []
+
+
+    # # TEST CODE FROM STACKOVERFLOW
+    # fringe = util.PriorityQueue()
+    # visited = {} # Visited nodes
+
+    # if problem.isGoalState(problem.getStartState()):
+    #     return []
+
+    # fringe.push((problem.getStartState(),[]),0)
+
+    # while not fringe.isEmpty():
+    #     currentState, pathToCurrent = fringe.pop()
+    #     currentCost = problem.getCostOfActions(pathToCurrent)
+
+    #     if problem.isGoalState(currentState):
+    #         return pathToCurrent
+
+    #     if currentState not in visited or currentCost<visited[currentState]:
+    #         visited[currentState]=currentCost
+    #         for successor,action,stepCost in problem.getSuccessors(currentState):
+    #             currentTotalCost = currentCost + stepCost + heuristic(successor,problem)
+    #             fringe.push((successor, pathToCurrent+[action]),currentTotalCost)
+    # return []
 
             # closed.append(currentState)
             # for successor, action, stepCount in problem.getSuccessors(currentState):
