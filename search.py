@@ -170,7 +170,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     #                     open.append(n)
 
     open = util.PriorityQueue()
-    visitedNode = {} # Visited nodes
+    visitedNodes = {} # Visited nodes
 
     if problem.isGoalState(problem.getStartState()):
         return []
@@ -184,8 +184,8 @@ def aStarSearch(problem, heuristic=nullHeuristic):
         if problem.isGoalState(currentState):
             return pathwayCurrent
 
-        if currentState not in visitedNode or currentCost<visitedNode[currentState]:
-            visitedNode[currentState]=currentCost
+        if currentState not in visitedNodes or currentCost<visitedNodes[currentState]:
+            visitedNodes[currentState]=currentCost
             for successor,action,stepCost in problem.getSuccessors(currentState):
                 currentTotalCost = currentCost + stepCost + heuristic(successor,problem)
                 open.push((successor, pathwayCurrent+[action]),currentTotalCost)
