@@ -169,31 +169,53 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     #                     closed.remove(X)
     #                     open.append(n)
 
-
-    #         closed.append(X)
-
-    # TEST CODE FROM STACKOVERFLOW
-    fringe = util.PriorityQueue()
-    visited = {} # Visited nodes
+    open = util.PriorityQueue()
+    visitedNode = {} # Visited nodes
 
     if problem.isGoalState(problem.getStartState()):
         return []
 
-    fringe.push((problem.getStartState(),[]),0)
+    open.push((problem.getStartState(),[]),0)
 
-    while not fringe.isEmpty():
-        currentState, pathToCurrent = fringe.pop()
-        currentCost = problem.getCostOfActions(pathToCurrent)
+    while not open.isEmpty():
+        currentState, pathwayCurrent = open.pop()
+        currentCost = problem.getCostOfActions(pathwayCurrent)
 
         if problem.isGoalState(currentState):
-            return pathToCurrent
+            return pathwayCurrent
 
-        if currentState not in visited or currentCost<visited[currentState]:
-            visited[currentState]=currentCost
+        if currentState not in visitedNode or currentCost<visitedNode[currentState]:
+            visitedNode[currentState]=currentCost
             for successor,action,stepCost in problem.getSuccessors(currentState):
                 currentTotalCost = currentCost + stepCost + heuristic(successor,problem)
-                fringe.push((successor, pathToCurrent+[action]),currentTotalCost)
+                open.push((successor, pathwayCurrent+[action]),currentTotalCost)
     return []
+
+
+    #         closed.append(X)
+
+    # TEST CODE FROM STACKOVERFLOW
+    # fringe = util.PriorityQueue()
+    # visited = {} # Visited nodes
+
+    # if problem.isGoalState(problem.getStartState()):
+    #     return []
+
+    # fringe.push((problem.getStartState(),[]),0)
+
+    # while not fringe.isEmpty():
+    #     currentState, pathToCurrent = fringe.pop()
+    #     currentCost = problem.getCostOfActions(pathToCurrent)
+
+    #     if problem.isGoalState(currentState):
+    #         return pathToCurrent
+
+    #     if currentState not in visited or currentCost<visited[currentState]:
+    #         visited[currentState]=currentCost
+    #         for successor,action,stepCost in problem.getSuccessors(currentState):
+    #             currentTotalCost = currentCost + stepCost + heuristic(successor,problem)
+    #             fringe.push((successor, pathToCurrent+[action]),currentTotalCost)
+    # return []
 
 
     # # TEST CODE FROM STACKOVERFLOW
