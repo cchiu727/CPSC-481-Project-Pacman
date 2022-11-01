@@ -133,22 +133,22 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     open = util.PriorityQueue()
     closed = {}
     actionsList = []
-    open.push((problem.getStartState(), actionsList), 100)
+    open.push((problem.getStartState(), actionsList), 0) # push root node onto prio queue
 
     while not open.isEmpty():
-        currentState, currentActionsList = open.pop()
-        currentCostOfActions = problem.getCostOfActions(currentActionsList)
+        currentState, currentActionsList = open.pop() # unpack
+        currentCostOfActions = problem.getCostOfActions(currentActionsList) # get action costs so far
 
-        if problem.isGoalState(currentState):
+        if problem.isGoalState(currentState): # returns actions if goal state reached
             return currentActionsList
         
-        if currentState not in closed or currentCostOfActions < closed[currentState]:
-            closed[currentState] = currentCostOfActions
-            for successor, action, stepCount in problem.getSuccessors(currentState):
-                totalCost = currentCostOfActions + stepCount + heuristic(successor, problem)
-                newActionsList = currentActionsList.copy()
-                newActionsList.append(action)
-                open.push((successor, newActionsList), totalCost)
+        if currentState not in closed or currentCostOfActions < closed[currentState]: # if state is unvisited OR action cost is less than node in closed
+            closed[currentState] = currentCostOfActions # get action cost of node in closed
+            for successor, action, stepCount in problem.getSuccessors(currentState): # unpack
+                totalCost = currentCostOfActions + stepCount + heuristic(successor, problem) # add up total cost with heuristic
+                newActionsList = currentActionsList.copy() # take copy of actions list
+                newActionsList.append(action) # append new action
+                open.push((successor, newActionsList), totalCost) # push successor and actions list on queue
     
     return currentActionsList
     
