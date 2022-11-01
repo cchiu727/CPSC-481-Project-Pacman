@@ -303,7 +303,6 @@ class CornersProblem(search.SearchProblem):
         """
         "*** YOUR CODE HERE ***"
         # The goal state is rea6ched when all four corners have been visited
-        #print(state)
         if len(state[1]) == 4:
             return True
         else:
@@ -328,16 +327,16 @@ class CornersProblem(search.SearchProblem):
             hitsWall = self.walls[nextx][nexty]
             "*** YOUR CODE HERE ***"
             
-            nextState = (nextx, nexty)
-            visited = state[1] + [(nextState)]
-            if not hitsWall:
-                if (nextState) in self.corners: 
-                    if (nextState) not in state[1]:
-                        successors.append((((nextState), visited), action, 1))
+            nextState = (nextx, nexty) # nextx and next y put into a touple
+            cornerAndSuccessors = state[1] + [(nextState)] # corner state and next state
+            if not hitsWall: # if the successors is not in a wall
+                if (nextState) in self.corners: # If the successors is a corner
+                    if (nextState) not in state[1]: # and successors is not allready in the list of know corners
+                        successors.append((((nextState), cornerAndSuccessors), action, 1)) # add the corner, and the successors
                     else:
-                        successors.append((((nextState), state[1]), action, 1))
+                        successors.append((((nextState), state[1]), action, 1)) # only add the successors
                 else:
-                    successors.append((((nextState), state[1]), action, 1))
+                    successors.append((((nextState), state[1]), action, 1)) # only add the successors
                     
         self._expanded += 1 # DO NOT CHANGE
         return successors
