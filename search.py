@@ -145,7 +145,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     #     elif X not in closed:
     #         while (len(X) > 0):
     #             n = len(X)
-
+    #         closed.append(X)
     #         while (n > 0):
     #             if (n not in open and n not in closed):
     #                 #assign the child a heuristic value
@@ -164,7 +164,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     #                 if n < len(X):
     #                     closed.remove(X)
     #                     open.append(n)
-
+  
     open = util.PriorityQueue()
     visitedNodes = {} # Visited nodes
 
@@ -186,9 +186,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                 currentTotalCost = currentCost + stepCost + heuristic(successor,problem)
                 open.push((successor, pathwayCurrent+[action]),currentTotalCost)
     return []
-
-
-    #         closed.append(X)
 
     # TEST CODE FROM STACKOVERFLOW
     # fringe = util.PriorityQueue()
@@ -212,7 +209,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     #             currentTotalCost = currentCost + stepCost + heuristic(successor,problem)
     #             fringe.push((successor, pathToCurrent+[action]),currentTotalCost)
     # return []
-
 
     #Best-First search pseudocode algorithm on page 5 of LO4 slides
     util.raiseNotDefined()
