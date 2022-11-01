@@ -23,7 +23,6 @@ class SearchProblem:
     """
     This class outlines the structure of a search problem, but doesn't implement
     any of the methods (in object-oriented terminology: an abstract class).
-
     You do not need to change anything in this class, ever.
     """
 
@@ -36,7 +35,6 @@ class SearchProblem:
     def isGoalState(self, state):
         """
           state: Search state
-
         Returns True if and only if the state is a valid goal state.
         """
         util.raiseNotDefined()
@@ -44,7 +42,6 @@ class SearchProblem:
     def getSuccessors(self, state):
         """
           state: Search state
-
         For a given state, this should return a list of triples, (successor,
         action, stepCost), where 'successor' is a successor to the current
         state, 'action' is the action required to get there, and 'stepCost' is
@@ -55,7 +52,6 @@ class SearchProblem:
     def getCostOfActions(self, actions):
         """
          actions: A list of actions to take
-
         This method returns the total cost of a particular sequence of actions.
         The sequence must be composed of legal moves.
         """
@@ -129,6 +125,29 @@ def nullHeuristic(state, problem=None):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
+
+    open = util.PriorityQueue()
+    closed = {}
+    actionsList = []
+    open.push((problem.getStartState(), actionsList), 0) # push root node onto prio queue
+
+    while not open.isEmpty():
+        currentState, currentActionsList = open.pop() # unpack
+        currentCostOfActions = problem.getCostOfActions(currentActionsList) # get action costs so far
+
+        if problem.isGoalState(currentState): # returns actions if goal state reached
+            return currentActionsList
+        
+        if currentState not in closed or currentCostOfActions < closed[currentState]: # if state is unvisited OR action cost is less than node in closed
+            closed[currentState] = currentCostOfActions # get action cost of node in closed
+            for successor, action, stepCount in problem.getSuccessors(currentState): # unpack
+                totalCost = currentCostOfActions + stepCount + heuristic(successor, problem) # add up total cost with heuristic
+                newActionsList = currentActionsList.copy() # take copy of actions list
+                newActionsList.append(action) # append new action
+                open.push((successor, newActionsList), totalCost) # push successor and actions list on queue
+    
+    return currentActionsList
+    
     util.raiseNotDefined()
 
 
