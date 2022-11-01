@@ -302,9 +302,8 @@ class CornersProblem(search.SearchProblem):
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        isGoal = len(state[1]) == 4
+        isGoal = len(state[1]) == 4 # confirm that state[1] has 4 corners
         return isGoal
-        # return len(state[1]) == 4
 
     def getSuccessors(self, state):
         """
@@ -316,20 +315,23 @@ class CornersProblem(search.SearchProblem):
             state, 'action' is the action required to get there, and 'stepCost'
             is the incremental cost of expanding to that successor
         """
-        currentPosition, foundCorners = state[0], state[1]
         successors = []
+        currentPosition, foundCorners = state[0], state[1]
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
             x,y = currentPosition
             dx, dy = Actions.directionToVector(action)
             nextx, nexty = int(x + dx), int(y + dy)
             hitsWall = self.walls[nextx][nexty]
             "*** YOUR CODE HERE ***"
-            # I DO NOT UNDERSTAND THIS
+            # if the next move does not hit a wall
             if not hitsWall:
+                # if possible move is a corner and possible move is not already traversed
                 if (nextx, nexty) in self.corners and (nextx, nexty) not in foundCorners:
-                    visited = foundCorners + [(nextx, nexty)]
-                    successors.append((((nextx, nexty), visited), action, 1))
+                    closed = foundCorners + [(nextx, nexty)]
+                    # can we rework this line?
+                    successors.append((((nextx, nexty), closed), action, 1))
                 else:
+                    # can we rework this line?
                     successors.append((((nextx, nexty), foundCorners), action, 1))
         self._expanded += 1 # DO NOT CHANGE
         return successors

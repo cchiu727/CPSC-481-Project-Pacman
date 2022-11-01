@@ -133,7 +133,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     open = util.PriorityQueue()
     closed = {}
     actionsList = []
-    open.push((problem.getStartState(), actionsList), 0)
+    open.push((problem.getStartState(), actionsList), 100)
 
     while not open.isEmpty():
         currentState, currentActionsList = open.pop()
