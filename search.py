@@ -124,10 +124,6 @@ def nullHeuristic(state, problem=None):
     A heuristic function estimates the cost from the current state to the nearest
     goal in the provided SearchProblem.  This heuristic is trivial.
     """
-
-    # x1, y1 = state[0], state[1]
-    # x2, y2 = problem.getStartState()[0], problem.getStartState()[1]
-    # return min((x1-x2),(y1-y2))
     return 0
 
 def aStarSearch(problem, heuristic=nullHeuristic):
