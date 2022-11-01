@@ -319,22 +319,26 @@ class CornersProblem(search.SearchProblem):
             state, 'action' is the action required to get there, and 'stepCost'
             is the incremental cost of expanding to that successor
         """
-        currentPosition, foundCorners = state[0], state[1]
         successors = []
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
             # Add a successor state to the successor list if the action is legal
             # Here's a code snippet for figuring out whether a new position hits a wall:
-            x,y = currentPosition
+            x,y = state[0]
             dx, dy = Actions.directionToVector(action)
             nextx, nexty = int(x + dx), int(y + dy)
             hitsWall = self.walls[nextx][nexty]
             "*** YOUR CODE HERE ***"
+            
+            nextState = (nextx, nexty)
+            visited = state[1] + [(nextState)]
             if not hitsWall:
-                if (nextx, nexty) in self.corners and (nextx, nexty) not in foundCorners:
-                    visited = foundCorners + [(nextx, nexty)]
-                    successors.append((((nextx, nexty), visited), action, 1))
+                if (nextState) in self.corners: 
+                    if (nextState) not in state[1]:
+                        successors.append((((nextState), visited), action, 1))
+                    else:
+                        successors.append((((nextState), state[1]), action, 1))
                 else:
-                    successors.append((((nextx, nexty), foundCorners), action, 1))
+                    successors.append((((nextState), state[1]), action, 1))
 
         self._expanded += 1 # DO NOT CHANGE
         return successors
