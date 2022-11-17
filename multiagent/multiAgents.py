@@ -72,8 +72,30 @@ class ReflexAgent(Agent):
         newFood = successorGameState.getFood()
         newGhostStates = successorGameState.getGhostStates()
         newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
+        BIGNUM = 100000
 
         "*** YOUR CODE HERE ***"
+        dis = BIGNUM
+        if successorGameState.isWin():
+            return dis
+        if successorGameState.isLose():
+            return -dis
+
+        ghostPositions = [ghostState.getPosition(
+        ) for ghostState in newGhostStates if ghostState.scaredTimer == 0]
+        if ghostPositions:
+            closestGhost = min([util.manhattanDistance(
+                newPos, ghostPos) for ghostPos in ghostPositions])
+            if closestGhost == 0:
+                return -dis
+        else:
+            return dis
+
+        closestFood = min([util.manhattanDistance(newPos, foodPos)
+                           for foodPos in newFood.asList()])
+
+        return successorGameState.getScore() + sum(newScaredTimes) + 1.0 / (closestFood * closestGhost)
+
         return successorGameState.getScore()
 
 def scoreEvaluationFunction(currentGameState):
@@ -135,6 +157,33 @@ class MinimaxAgent(MultiAgentSearchAgent):
         Returns whether or not the game state is a losing state
         """
         "*** YOUR CODE HERE ***"
+
+        return self.MinimaxSearch(gameState, 1, 0)  # util.raiseNotDefined()
+
+    def MinimaxSearch(self, gameState, currentDepth, agentIndex):
+        if agentIndex >= gameState.getNumAgents():
+            return self.MinimaxSearch(gameState, currentDepth+1, 0)
+        if currentDepth > self.depth or gameState.isWin() or gameState.isLose():
+            return self.evaluationFunction(gameState)
+
+        legalMoves = [action for action in gameState.getLegalActions(
+            agentIndex) if action != 'Stop']
+
+        scores = [self.MinimaxSearch(gameState.generateSuccessor(
+            agentIndex, action), currentDepth, agentIndex + 1) for action in legalMoves]
+
+        if agentIndex == 0:
+            bestScore = max(scores)
+            if currentDepth == 1:  # pacman first move
+                bestIndices = [index for index in range(
+                    len(scores)) if scores[index] == bestScore]
+                chosenIndex = random.choice(bestIndices)
+                return legalMoves[chosenIndex]
+            return bestScore
+        else:
+            return min(scores)
+
+
         util.raiseNotDefined()
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
