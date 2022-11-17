@@ -94,7 +94,8 @@ class ReflexAgent(Agent):
         closestFood = min([util.manhattanDistance(newPos, foodPos)
                            for foodPos in newFood.asList()])
 
-        return successorGameState.getScore() + sum(newScaredTimes) + 1.0 / (closestFood * closestGhost)
+        #return successorGameState.getScore() + sum(newScaredTimes) + 1.0 / (closestFood * closestGhost)
+        return successorGameState.getScore() + sum(newScaredTimes) + 1.0 / (dis - closestGhost + closestFood) 
 
         #return successorGameState.getScore()
 
