@@ -72,10 +72,10 @@ class ReflexAgent(Agent):
         newFood = successorGameState.getFood()
         newGhostStates = successorGameState.getGhostStates()
         newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
-        BIGNUM = 10000
+        LARGENUMBER = 10000
 
         "*** YOUR CODE HERE ***"
-        dis = BIGNUM
+        dis = LARGENUMBER
         if successorGameState.isWin():
             return dis
         if successorGameState.isLose():
