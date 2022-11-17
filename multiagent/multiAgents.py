@@ -72,7 +72,7 @@ class ReflexAgent(Agent):
         newFood = successorGameState.getFood()
         newGhostStates = successorGameState.getGhostStates()
         newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
-        BIGNUM = 100000
+        BIGNUM = 10000
 
         "*** YOUR CODE HERE ***"
         dis = BIGNUM
@@ -96,7 +96,7 @@ class ReflexAgent(Agent):
 
         return successorGameState.getScore() + sum(newScaredTimes) + 1.0 / (closestFood * closestGhost)
 
-        return successorGameState.getScore()
+        #return successorGameState.getScore()
 
 def scoreEvaluationFunction(currentGameState):
     """
