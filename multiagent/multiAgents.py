@@ -86,7 +86,7 @@ class ReflexAgent(Agent):
         if ghostPositions:
             closestGhost = min([util.manhattanDistance(
                 newPos, ghostPos) for ghostPos in ghostPositions])
-            if closestGhost == 0:
+            if closestGhost == 1: #0
                 return -dis
         else:
             return dis
