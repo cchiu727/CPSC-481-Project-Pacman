@@ -134,6 +134,14 @@ class ReflexAgent(Agent):
             
             if pacmanx == ghostx and pacmany+3 == ghosty:
                 heruestic -= 1000
+            if pacmanx+1 == ghostx and pacmany+1 == ghosty and wall[pacmanx+1][pacmany] == True:
+                heruestic -= 1000
+            if pacmanx+2 == ghostx and pacmany+2 == ghosty and wall[pacmanx+1][pacmany] == True:
+                heruestic -= 1000
+            if pacmanx-1 == ghostx and pacmany+1 == ghosty and wall[pacmanx-1][pacmany] == True:
+                heruestic -= 1000
+            if pacmanx-2 == ghostx and pacmany+2 == ghosty and wall[pacmanx-1][pacmany] == True:
+                heruestic -= 1000
 
         if action == "South":
             #print("south")
@@ -146,11 +154,20 @@ class ReflexAgent(Agent):
                 heruestic -= 1000
             if pacmanx+1 == ghostx and pacmany-1 == ghosty and wall[pacmanx+1][pacmany] == True:
                 heruestic -= 1000
-            if pacmanx-1 == ghostx and pacmany-1 == ghosty and wall[pacmanx+1][pacmany] == True:
+            if pacmanx-1 == ghostx and pacmany-1 == ghosty and wall[pacmanx-1][pacmany] == True:
                 heruestic -= 1000
 
             if pacmanx == ghostx and pacmany-3 == ghosty:
                 heruestic -= 1000
+            if pacmanx+2 == ghostx and pacmany+1 == ghosty and wall[pacmanx+1][pacmany] == True:
+                heruestic -= 1000
+            if pacmanx+1 == ghostx and pacmany+2 == ghosty and wall[pacmanx+1][pacmany] == True:
+                heruestic -= 1000
+            if pacmanx-2 == ghostx and pacmany-1 == ghosty and wall[pacmanx-1][pacmany] == True:
+                heruestic -= 1000
+            if pacmanx-1 == ghostx and pacmany+2 == ghosty and wall[pacmanx-1][pacmany] == True:
+                heruestic -= 1000
+            
 
         if action == "East":
             #print("east")
@@ -168,6 +185,14 @@ class ReflexAgent(Agent):
             
             if pacmanx+3 == ghostx and pacmany == ghosty:
                 heruestic -= 1000
+            if pacmanx+1 == ghostx and pacmany+2 == ghosty and wall[pacmanx][pacmany+1] == True:
+                heruestic -= 1000
+            if pacmanx+2 == ghostx and pacmany+1 == ghosty and wall[pacmanx][pacmany+1] == True:
+                heruestic -= 1000
+            if pacmanx+1 == ghostx and pacmany-2 == ghosty and wall[pacmanx][pacmany-1] == True:
+                heruestic -= 1000
+            if pacmanx+2 == ghostx and pacmany-1 == ghosty and wall[pacmanx][pacmany-1] == True:
+                heruestic -= 1000
 
         if action == "West":
             #print("west")
@@ -180,10 +205,18 @@ class ReflexAgent(Agent):
                 heruestic =-1000
             if pacmanx-1 == ghostx and pacmany-1 == ghosty and wall[pacmanx][pacmany-1] == True:
                 heruestic =-1000
-            if pacmanx-1 == ghostx and pacmany+1 == ghosty and wall[pacmanx][pacmany-1] == True:
+            if pacmanx-1 == ghostx and pacmany+1 == ghosty and wall[pacmanx][pacmany+1] == True:
                 heruestic =-1000
 
             if pacmanx-3 == ghostx and pacmany == ghosty:
+                heruestic -= 1000
+            if pacmanx-1 == ghostx and pacmany+2 == ghosty and wall[pacmanx][pacmany+1] == True:
+                heruestic -= 1000
+            if pacmanx-2 == ghostx and pacmany+1 == ghosty and wall[pacmanx][pacmany+1] == True:
+                heruestic -= 1000
+            if pacmanx-1 == ghostx and pacmany-2 == ghosty and wall[pacmanx][pacmany-1] == True:
+                heruestic -= 1000
+            if pacmanx-2 == ghostx and pacmany-1 == ghosty and wall[pacmanx][pacmany-1] == True:
                 heruestic -= 1000
 
         #if action == "Stop":
