@@ -54,15 +54,12 @@ class ReflexAgent(Agent):
     def evaluationFunction(self, currentGameState, action):
         """
         Design a better evaluation function here.
-
         The evaluation function takes in the current and proposed successor
         GameStates (pacman.py) and returns a number, where higher numbers are better.
-
         The code below extracts some useful information from the state, like the
         remaining food (newFood) and Pacman position after moving (newPos).
         newScaredTimes holds the number of moves that each ghost will remain
         scared because of Pacman having eaten a power pellet.
-
         Print out these variables to see what you're getting, then combine them
         to create a masterful evaluation function.
         """
@@ -72,161 +69,25 @@ class ReflexAgent(Agent):
         newFood = successorGameState.getFood()
         newGhostStates = successorGameState.getGhostStates()
         newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
-        #print(newScaredTimes)
+        LARGENUMBER = 10000
 
         "*** YOUR CODE HERE ***"
-        #heruestic = 0
-        # for char in newFood:
-        #     if char == "T":
-        #         heruestic += 100
-        #     else:
-        #         heruestic -= 100
-
-        #ghostPos = [successorGameState.getGhostPosition for ghostState in newGhostStates]
-        #print(ghostPos)
-        #ghostPos = [successorGameState.getAction for ghostSTate in newGhostStates]
-        #print(currentGameState, action)
-
-        # print(currentGameState, action)
-        # if action == "stop":
-        #     heruestic += 0
-        #     print("why helloo")
-        # print(currentGameState[1][1])
-        # if action == "North" and (currentGameState[newPos[1]-1]) == ".":
-        #     heruestic += 100
-        #     print("hello")
-        # if action == "North" and (currentGameState[newPos[1]-1]) == "":
-        #     heruestic -= 100
-        #     print("hi")
-        #print(currentGameState.getCapsules())
-
-        #if action == "Stop":
-        #    #print(currentGameState[1][1][1])
-        #    heruestic += 0
-        #    #print(currentGameState.getCapsules())
-
-        heruestic = 0
-        food = currentGameState.getFood()
-        #print(food[1][1] == True)
-        #print(currentGameState.getPacmanPosition())
-        #print(currentGameState.getGhostPosition(1))
-
-        pacmanx, pacmany = currentGameState.getPacmanPosition()
-        ghostx, ghosty = currentGameState.getGhostPosition(1)
-        #print(pacmanx)
-        #print(pacmany)
-
-        wall = currentGameState.getWalls()
+        if successorGameState.isWin(): return LARGENUMBER
+        if successorGameState.isLose(): return -LARGENUMBER
+        closestFood = min([util.manhattanDistance(newPos, foodPos) for foodPos in newFood.asList()])
+        ghostPositions = [ghostState.getPosition() for ghostState in newGhostStates]
         
-        if action == "North":
-            #print("north")
-            if food[pacmanx][pacmany+1] == True:
-                heruestic += 100
-            if pacmanx == ghostx and pacmany+1 == ghosty:
-                heruestic -= 1000
-            
-            if pacmanx == ghostx and pacmany+2 == ghosty:
-                heruestic -= 1000
-            if pacmanx+1 == ghostx and pacmany+1 == ghosty and wall[pacmanx+1][pacmany] == True:
-                heruestic -= 1000
-            if pacmanx-1 == ghostx and pacmany+1 == ghosty and wall[pacmanx-1][pacmany] == True:
-                heruestic -= 1000
-            
-            if pacmanx == ghostx and pacmany+3 == ghosty:
-                heruestic -= 1000
-            if pacmanx+1 == ghostx and pacmany+1 == ghosty and wall[pacmanx+1][pacmany] == True:
-                heruestic -= 1000
-            if pacmanx+2 == ghostx and pacmany+2 == ghosty and wall[pacmanx+1][pacmany] == True:
-                heruestic -= 1000
-            if pacmanx-1 == ghostx and pacmany+1 == ghosty and wall[pacmanx-1][pacmany] == True:
-                heruestic -= 1000
-            if pacmanx-2 == ghostx and pacmany+2 == ghosty and wall[pacmanx-1][pacmany] == True:
-                heruestic -= 1000
-
-        if action == "South":
-            #print("south")
-            if food[pacmanx][pacmany-1] == True:
-                heruestic += 100
-            if pacmanx == ghostx and pacmany-1 == ghosty:
-                heruestic -= 1000
-            
-            if pacmanx == ghostx and pacmany-2 == ghosty:
-                heruestic -= 1000
-            if pacmanx+1 == ghostx and pacmany-1 == ghosty and wall[pacmanx+1][pacmany] == True:
-                heruestic -= 1000
-            if pacmanx-1 == ghostx and pacmany-1 == ghosty and wall[pacmanx-1][pacmany] == True:
-                heruestic -= 1000
-
-            if pacmanx == ghostx and pacmany-3 == ghosty:
-                heruestic -= 1000
-            if pacmanx+2 == ghostx and pacmany+1 == ghosty and wall[pacmanx+1][pacmany] == True:
-                heruestic -= 1000
-            if pacmanx+1 == ghostx and pacmany+2 == ghosty and wall[pacmanx+1][pacmany] == True:
-                heruestic -= 1000
-            if pacmanx-2 == ghostx and pacmany-1 == ghosty and wall[pacmanx-1][pacmany] == True:
-                heruestic -= 1000
-            if pacmanx-1 == ghostx and pacmany+2 == ghosty and wall[pacmanx-1][pacmany] == True:
-                heruestic -= 1000
-            
-
-        if action == "East":
-            #print("east")
-            if food[pacmanx+1][pacmany] == True:
-                heruestic += 100
-            if pacmanx+1 == ghostx and pacmany == ghosty:
-                heruestic -= 1000
-            
-            if pacmanx+2 == ghostx and pacmany == ghosty:
-                heruestic -= 1000
-            if pacmanx+1 == ghostx and pacmany-1 == ghosty and wall[pacmanx][pacmany-1] == True:
-                heruestic -= 1000
-            if pacmanx+1 == ghostx and pacmany+1 == ghosty and wall[pacmanx][pacmany+1] == True:
-                heruestic -= 1000
-            
-            if pacmanx+3 == ghostx and pacmany == ghosty:
-                heruestic -= 1000
-            if pacmanx+1 == ghostx and pacmany+2 == ghosty and wall[pacmanx][pacmany+1] == True:
-                heruestic -= 1000
-            if pacmanx+2 == ghostx and pacmany+1 == ghosty and wall[pacmanx][pacmany+1] == True:
-                heruestic -= 1000
-            if pacmanx+1 == ghostx and pacmany-2 == ghosty and wall[pacmanx][pacmany-1] == True:
-                heruestic -= 1000
-            if pacmanx+2 == ghostx and pacmany-1 == ghosty and wall[pacmanx][pacmany-1] == True:
-                heruestic -= 1000
-
-        if action == "West":
-            #print("west")
-            if food[pacmanx-1][pacmany] == True:
-                heruestic += 100
-            if pacmanx-1 == ghostx and pacmany == ghosty:
-                heruestic =-1000
-            
-            if pacmanx-2 == ghostx and pacmany == ghosty:
-                heruestic =-1000
-            if pacmanx-1 == ghostx and pacmany-1 == ghosty and wall[pacmanx][pacmany-1] == True:
-                heruestic =-1000
-            if pacmanx-1 == ghostx and pacmany+1 == ghosty and wall[pacmanx][pacmany+1] == True:
-                heruestic =-1000
-
-            if pacmanx-3 == ghostx and pacmany == ghosty:
-                heruestic -= 1000
-            if pacmanx-1 == ghostx and pacmany+2 == ghosty and wall[pacmanx][pacmany+1] == True:
-                heruestic -= 1000
-            if pacmanx-2 == ghostx and pacmany+1 == ghosty and wall[pacmanx][pacmany+1] == True:
-                heruestic -= 1000
-            if pacmanx-1 == ghostx and pacmany-2 == ghosty and wall[pacmanx][pacmany-1] == True:
-                heruestic -= 1000
-            if pacmanx-2 == ghostx and pacmany-1 == ghosty and wall[pacmanx][pacmany-1] == True:
-                heruestic -= 1000
-
-        #if action == "Stop":
-            #print("stop")
-            #heruestic = 100000000
+        if len(ghostPositions) != 0:          
+            closestGhost = min([util.manhattanDistance(newPos, ghostPos) for ghostPos in ghostPositions])
+            if closestGhost == 1:
+                return -LARGENUMBER
         
-        
-        #return heruestic
+        else:
+            return LARGENUMBER
 
-        return heruestic
+        return successorGameState.getScore() / (LARGENUMBER - closestGhost + closestFood) 
+
+        #return successorGameState.getScore()
 
 def scoreEvaluationFunction(currentGameState):
     """
